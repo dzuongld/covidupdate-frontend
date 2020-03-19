@@ -171,7 +171,7 @@ class List extends React.Component {
                     </div>
                 </div>
 
-                <table className="table table-striped">
+                <table className="table table-striped table-responsive-md">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -182,8 +182,8 @@ class List extends React.Component {
                             </th>
                             <th className="text-primary">TOTAL</th>
                             <th className="text-warning">NEW</th>
-                            <th className="mobile text-danger">DEATHS</th>
-                            <th className="mobile text-success">RECOVERED</th>
+                            <th className="text-danger">DEATHS</th>
+                            <th className="text-success">RECOVERED</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -202,10 +202,10 @@ class List extends React.Component {
                                     <td className="text-warning">
                                         {numeral(entry[2]).format('0,0')}
                                     </td>
-                                    <td className="mobile text-danger">
+                                    <td className="text-danger">
                                         {numeral(entry[3]).format('0,0')}
                                     </td>
-                                    <td className="mobile text-success">
+                                    <td className="text-success">
                                         {numeral(entry[4]).format('0,0')}
                                     </td>
                                 </tr>

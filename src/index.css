@@ -70,8 +70,4 @@ th {
     .mapContainer {
         height: 250px;
     }
-
-    .mobile {
-        display: none;
-    }
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import NewsItem from './NewsItem'
+import Loader from './Loader'
 
 const PAGE_SIZE = 4
 
@@ -16,18 +17,17 @@ class NewsFeed extends React.Component {
             data: [],
             dataDisplayed: [],
             currentPage: 1,
-            totalPages: 1
+            totalPages: 1,
+            loading: true
         }
     }
 
     componentDidMount() {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/newsfeed`)
             .then((response) => {
-                console.log(response)
                 return response.json()
             })
             .then((newData) => {
-                console.log(newData)
                 const newTotalPages = Math.ceil(newData.length / PAGE_SIZE)
                 this.setState({
                     data: newData,
@@ -35,7 +35,8 @@ class NewsFeed extends React.Component {
                     dataDisplayed: getDataByPage(
                         newData,
                         this.state.currentPage
-                    )
+                    ),
+                    loading: false
                 })
             })
             .catch((error) => {
@@ -55,6 +56,7 @@ class NewsFeed extends React.Component {
     }
 
     render() {
+        if (this.state.loading) return <Loader />
         return (
             <div>
                 <h2>News Feed</h2>

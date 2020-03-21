@@ -19,12 +19,12 @@ class Map extends React.Component {
             this.setState({
                 data: this.context.data.covidData
             })
+            this.map = new mapboxgl.Map({
+                container: this.mapContainer,
+                style: 'mapbox://styles/dzuongld/ck7stm0id1l9t1inuoudjp6oy'
+            })
+            mapbox.addMarkers(this.context.data.covidData, this.map, mapboxgl)
         }
-        this.map = new mapboxgl.Map({
-            container: this.mapContainer,
-            style: 'mapbox://styles/dzuongld/ck7stm0id1l9t1inuoudjp6oy'
-        })
-        mapbox.addMarkers(this.context.data.covidData, this.map, mapboxgl)
     }
 
     /* 

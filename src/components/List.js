@@ -3,6 +3,8 @@ import numeral from 'numeral'
 import fields from '../utils/fields'
 import DataContext from '../contexts/DataContext'
 
+const PAGE_SIZE = 10
+
 const transformData = (data, groupByCountry, selectedCountry) => {
     // console.log(data)
     const list = []
@@ -65,8 +67,8 @@ const transformData = (data, groupByCountry, selectedCountry) => {
 }
 
 const getDataByPage = (data, page) => {
-    const end = page * 10
-    const start = end - 10
+    const end = page * PAGE_SIZE
+    const start = end - PAGE_SIZE
     return data.slice(start, end)
 }
 
@@ -90,7 +92,7 @@ class List extends React.Component {
             this.props.groupByCountry,
             this.props.country
         )
-        const newTotalPages = Math.ceil(newData.length / 10)
+        const newTotalPages = Math.ceil(newData.length / PAGE_SIZE)
         this.setState({
             data: newData,
             totalPages: newTotalPages,

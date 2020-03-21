@@ -27,6 +27,7 @@ th {
 .btn:focus {
     outline: none;
     box-shadow: none;
+    background-color: #555;
 }
 
 /* ======= MAPBOX ========= */

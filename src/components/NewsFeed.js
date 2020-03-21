@@ -21,11 +21,13 @@ class NewsFeed extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/news`)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/newsfeed`)
             .then((response) => {
+                console.log(response)
                 return response.json()
             })
             .then((newData) => {
+                console.log(newData)
                 const newTotalPages = Math.ceil(newData.length / PAGE_SIZE)
                 this.setState({
                     data: newData,

@@ -1,6 +1,7 @@
 import React from 'react'
 import NewsItem from './NewsItem'
 import Loader from './Loader'
+import Error from './Error'
 
 const PAGE_SIZE = 4
 
@@ -18,7 +19,8 @@ class NewsFeed extends React.Component {
             dataDisplayed: [],
             currentPage: 1,
             totalPages: 1,
-            loading: true
+            loading: true,
+            error: false
         }
     }
 
@@ -41,6 +43,7 @@ class NewsFeed extends React.Component {
             })
             .catch((error) => {
                 console.log(error)
+                this.setState({ error: true })
             })
     }
 
@@ -57,6 +60,7 @@ class NewsFeed extends React.Component {
 
     render() {
         if (this.state.loading) return <Loader />
+        if (this.state.error) return <Error />
         return (
             <div>
                 <h2>News Feed</h2>

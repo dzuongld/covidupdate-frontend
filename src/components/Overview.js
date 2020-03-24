@@ -4,6 +4,7 @@ import numeral from 'numeral'
 
 import DataContext from '../contexts/DataContext'
 import fields from '../utils/fields'
+import fields2 from '../utils/fields-alt'
 
 const processData = (allRecords) => {
     let totalCount = 0
@@ -12,9 +13,11 @@ const processData = (allRecords) => {
     let newCount = 0
     let countries = {}
 
+    // console.table(allRecords)
+
     for (const key in allRecords) {
         const record = allRecords[key]
-        const country = record[fields.COUNTRY]
+        const country = record[fields.COUNTRY] || record[fields2.COUNTRY]
         if (!countries[country]) countries[country] = 1
         totalCount += parseInt(record[fields.CONFIRMED])
         deathCount += parseInt(record[fields.DEATHS])

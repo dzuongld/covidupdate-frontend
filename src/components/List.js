@@ -1,6 +1,7 @@
 import React from 'react'
 import numeral from 'numeral'
 import fields from '../utils/fields'
+import fields2 from '../utils/fields-alt'
 import DataContext from '../contexts/DataContext'
 
 const PAGE_SIZE = 10
@@ -13,7 +14,8 @@ const transformData = (data, groupByCountry, selectedCountry) => {
     if (groupByCountry) {
         for (const key in data.covidData) {
             const country = data.covidData[key]
-            const countryName = country[fields.COUNTRY]
+            const countryName =
+                country[fields.COUNTRY] || country[fields2.COUNTRY]
             if (dataDup[countryName]) {
                 dataDup[countryName][fields.CONFIRMED] += parseInt(
                     country[fields.CONFIRMED]
@@ -51,9 +53,10 @@ const transformData = (data, groupByCountry, selectedCountry) => {
     } else {
         for (const key in data.covidData) {
             const country = data.covidData[key]
-            const countryName = country[fields.COUNTRY]
+            const countryName =
+                country[fields.COUNTRY] || country[fields2.COUNTRY]
             if (countryName === selectedCountry) {
-                const state = country[fields.STATE]
+                const state = country[fields.STATE] || country[fields2.STATE]
                 const confirmed = country[fields.CONFIRMED]
                 const deaths = country[fields.DEATHS]
                 const recovered = country[fields.RECOVERED]

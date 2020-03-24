@@ -4,6 +4,7 @@ import List from './List'
 
 import DataContext from '../contexts/DataContext'
 import fields from '../utils/fields'
+import fields2 from '../utils/fields-alt'
 import mapbox from '../visualization/mapbox'
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API
@@ -33,8 +34,13 @@ class Map extends React.Component {
     extractNames(data) {
         const list = []
         for (const location in data) {
-            const country = data[location][fields.COUNTRY]
-            const state = data[location][fields.STATE]
+            const country =
+                data[location][fields.COUNTRY] ||
+                data[location][fields2.COUNTRY]
+            const state =
+                data[location][fields.STATE] ||
+                data[location][fields2.STATE] ||
+                ''
             const displayedName =
                 state !== '' ? country + ' - ' + state : country
             list.push([location, displayedName])
@@ -49,7 +55,9 @@ class Map extends React.Component {
 
     onCountryChange = (event) => {
         const location = event.target.value
-        const country = this.state.data[location][fields.COUNTRY]
+        const country =
+            this.state.data[location][fields.COUNTRY] ||
+            this.state.data[location][fields2.COUNTRY]
 
         // trigger 'fly' event on map
         mapbox.flyToLocation(this.state.data, this.map, location)

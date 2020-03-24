@@ -1,4 +1,5 @@
 import fields from '../utils/fields'
+import fields2 from '../utils/fields-alt'
 
 const convertToGeoJSON = (data) => {
     const geojson = {}
@@ -6,14 +7,22 @@ const convertToGeoJSON = (data) => {
     geojson.features = []
 
     for (const location in data) {
-        const state = data[location][fields.STATE]
-        const country = data[location][fields.COUNTRY]
+        const state =
+            data[location][fields.STATE] || data[location][fields2.STATE]
+        const country =
+            data[location][fields.COUNTRY] || data[location][fields2.COUNTRY]
         const totalCases = parseInt(data[location][fields.CONFIRMED])
         const newCases = parseInt(data[location][fields.NEW_CASES])
         const deaths = parseInt(data[location][fields.DEATHS])
         const recovered = parseInt(data[location][fields.RECOVERED])
-        const lat = parseFloat(data[location][fields.LATITUDE])
-        const lng = parseFloat(data[location][fields.LONGITUDE])
+
+        const latRaw =
+            data[location][fields.LATITUDE] || data[location][fields2.LATITUDE]
+        const lngRaw =
+            data[location][fields.LONGITUDE] ||
+            data[location][fields2.LONGITUDE]
+        const lat = parseFloat(latRaw)
+        const lng = parseFloat(lngRaw)
 
         const title = state !== '' ? state + ' - ' + country : country
         const record = {}
@@ -62,8 +71,12 @@ export const addMarkers = (data, map, mapboxgl) => {
 }
 
 const flyToLocation = (data, map, location) => {
-    const lat = parseFloat(data[location][fields.LATITUDE])
-    const lng = parseFloat(data[location][fields.LONGITUDE])
+    const latRaw =
+        data[location][fields.LATITUDE] || data[location][fields2.LATITUDE]
+    const lngRaw =
+        data[location][fields.LONGITUDE] || data[location][fields2.LONGITUDE]
+    const lat = parseFloat(latRaw)
+    const lng = parseFloat(lngRaw)
     map.flyTo({ center: [lng, lat], zoom: 6 })
 }
 

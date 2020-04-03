@@ -2,7 +2,7 @@ import React from 'react'
 
 const Loader = () => {
     const parent = {
-        minHeight: '90vh',
+        minHeight: '80vh',
         display: 'grid'
     }
     const child = {

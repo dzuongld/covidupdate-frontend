@@ -21,8 +21,11 @@ const convertToGeoJSON = (data) => {
         const lngRaw =
             data[location][fields.LONGITUDE] ||
             data[location][fields2.LONGITUDE]
+
         const lat = parseFloat(latRaw)
         const lng = parseFloat(lngRaw)
+
+        if (isNaN(lat) || isNaN(lng)) continue
 
         const title = state !== '' ? state + ' - ' + country : country
         const record = {}

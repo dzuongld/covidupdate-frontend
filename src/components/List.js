@@ -196,7 +196,8 @@ class List extends React.Component {
                             return (
                                 <tr key={entry[0]}>
                                     <td>
-                                        {(this.state.currentPage - 1) * 10 +
+                                        {(this.state.currentPage - 1) *
+                                            PAGE_SIZE +
                                             index +
                                             1}
                                     </td>

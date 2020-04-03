@@ -38,7 +38,8 @@ class NewsFeed extends React.Component {
                         newData,
                         this.state.currentPage
                     ),
-                    loading: false
+                    loading: false,
+                    error: false
                 })
             })
             .catch((error) => {
@@ -59,8 +60,8 @@ class NewsFeed extends React.Component {
     }
 
     render() {
-        if (this.state.loading) return <Loader />
         if (this.state.error) return <Error />
+        if (this.state.loading) return <Loader />
         return (
             <div>
                 <h2>News Feed</h2>
@@ -73,7 +74,7 @@ class NewsFeed extends React.Component {
                 {this.state.dataDisplayed.map((piece) => {
                     return (
                         <NewsItem
-                            key={piece.title}
+                            key={piece.description}
                             title={piece.title}
                             description={piece.description}
                             date={piece.pubDate[0]

@@ -7,7 +7,7 @@ const Home = () => {
         <div>
             <Overview />
 
-            <div className="alert alert-dismissible alert-info">
+            {/* <div className="alert alert-dismissible alert-info">
                 <button type="button" className="close" data-dismiss="alert">
                     &times;
                 </button>
@@ -15,7 +15,7 @@ const Home = () => {
                     Data of France is erroneous at the moment so please
                     disregard it for now.
                 </p>
-            </div>
+            </div> */}
 
             <List groupByCountry={true} />
         </div>

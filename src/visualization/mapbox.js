@@ -32,7 +32,7 @@ const convertToGeoJSON = (data) => {
         record.type = 'Feature'
         record.geometry = {
             type: 'Point',
-            coordinates: [lng, lat]
+            coordinates: [lng, lat],
         }
         record.properties = {
             title,
@@ -46,7 +46,7 @@ const convertToGeoJSON = (data) => {
                         New Cases: ${newCases}<br/>
                         Deaths: ${deaths}<br/>
                         Recovered: ${recovered}
-                        `
+                        `,
         }
         geojson.features.push(record)
     }
@@ -57,7 +57,7 @@ const convertToGeoJSON = (data) => {
 export const addMarkers = (data, map, mapboxgl) => {
     const geojson = convertToGeoJSON(data)
 
-    geojson.features.forEach(function(marker) {
+    geojson.features.forEach(function (marker) {
         // create a HTML element for each feature
         const el = document.createElement('div')
         el.className = 'marker'
@@ -80,7 +80,7 @@ const flyToLocation = (data, map, location) => {
         data[location][fields.LONGITUDE] || data[location][fields2.LONGITUDE]
     const lat = parseFloat(latRaw)
     const lng = parseFloat(lngRaw)
-    map.flyTo({ center: [lng, lat], zoom: 6 })
+    if (!isNaN(lat) && !isNaN(lng)) map.flyTo({ center: [lng, lat], zoom: 6 })
 }
 
 export default { flyToLocation, addMarkers }

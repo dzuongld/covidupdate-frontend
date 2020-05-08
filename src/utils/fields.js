@@ -7,5 +7,6 @@ export default {
     RECOVERED: 'Recovered',
     LATITUDE: 'Latitude',
     LONGITUDE: 'Longitude',
-    NEW_CASES: 'NewCases'
+    NEW_CASES: 'NewCases',
+    ACTIVE: 'Active',
 }

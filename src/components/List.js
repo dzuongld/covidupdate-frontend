@@ -29,6 +29,9 @@ const transformData = (data, groupByCountry, selectedCountry) => {
                 dataDup[countryName][fields.NEW_CASES] += parseInt(
                     country[fields.NEW_CASES]
                 )
+                dataDup[countryName][fields.ACTIVE] += parseInt(
+                    country[fields.ACTIVE]
+                )
             } else {
                 dataDup[countryName] = {}
                 dataDup[countryName][fields.CONFIRMED] = parseInt(
@@ -43,12 +46,17 @@ const transformData = (data, groupByCountry, selectedCountry) => {
                 dataDup[countryName][fields.NEW_CASES] = parseInt(
                     country[fields.NEW_CASES]
                 )
+                dataDup[countryName][fields.ACTIVE] = parseInt(
+                    country[fields.ACTIVE]
+                )
             }
         }
 
         for (const country in dataDup) {
-            const { Confirmed, Deaths, Recovered, NewCases } = dataDup[country]
-            list.push([country, Confirmed, NewCases, Deaths, Recovered])
+            const { Confirmed, Deaths, Recovered, NewCases, Active } = dataDup[
+                country
+            ]
+            list.push([country, Confirmed, NewCases, Deaths, Recovered, Active])
         }
     } else {
         for (const key in data.covidData) {
@@ -61,7 +69,15 @@ const transformData = (data, groupByCountry, selectedCountry) => {
                 const deaths = country[fields.DEATHS]
                 const recovered = country[fields.RECOVERED]
                 const newCases = country[fields.NEW_CASES]
-                list.push([state, confirmed, newCases, deaths, recovered])
+                const active = country[fields.ACTIVE]
+                list.push([
+                    state,
+                    confirmed,
+                    newCases,
+                    deaths,
+                    recovered,
+                    active,
+                ])
             }
         }
     }
@@ -85,7 +101,7 @@ class List extends React.Component {
             dataDisplayed: [],
             currentPage: 1,
             totalPages: 1,
-            currentCountry: this.props.country
+            currentCountry: this.props.country,
         }
     }
 
@@ -95,12 +111,17 @@ class List extends React.Component {
             this.props.groupByCountry,
             this.props.country
         )
+        newData.sort((a, b) => {
+            return b[1] - a[1]
+        })
+
         const newTotalPages = Math.ceil(newData.length / PAGE_SIZE)
+
         this.setState({
             data: newData,
             totalPages: newTotalPages,
             dataDisplayed: getDataByPage(newData, this.state.currentPage),
-            currentCountry: this.props.country
+            currentCountry: this.props.country,
         })
     }
 
@@ -123,7 +144,7 @@ class List extends React.Component {
         this.setState({
             data: newData,
             currentPage: 1,
-            dataDisplayed: getDataByPage(newData, 1)
+            dataDisplayed: getDataByPage(newData, 1),
         })
     }
 
@@ -134,7 +155,7 @@ class List extends React.Component {
         const newData = getDataByPage(this.state.data, page)
         this.setState({
             dataDisplayed: newData,
-            currentPage: page
+            currentPage: page,
         })
     }
 
@@ -163,7 +184,7 @@ class List extends React.Component {
                             className="custom-select"
                             id="inputGroupSelect01"
                             onChange={this.sortData}
-                            defaultValue=""
+                            defaultValue="1"
                         >
                             <option value="" disabled>
                                 --Select One--
@@ -172,6 +193,7 @@ class List extends React.Component {
                             <option value="2">New Cases</option>
                             <option value="3">Deaths</option>
                             <option value="4">Recovered</option>
+                            <option value="5">Active</option>
                         </select>
                     </div>
                 </div>
@@ -189,6 +211,7 @@ class List extends React.Component {
                             <th className="text-warning">NEW</th>
                             <th className="text-danger">DEATHS</th>
                             <th className="text-success">RECOVERED</th>
+                            <th className="text-info">ACTIVE</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -213,6 +236,9 @@ class List extends React.Component {
                                     </td>
                                     <td className="text-success">
                                         {numeral(entry[4]).format('0,0')}
+                                    </td>
+                                    <td className="text-info">
+                                        {numeral(entry[5]).format('0,0')}
                                     </td>
                                 </tr>
                             )

@@ -11,6 +11,7 @@ const processData = (allRecords) => {
     let deathCount = 0
     let recoveredCount = 0
     let newCount = 0
+    let activeCount = 0
     let countries = {}
 
     // console.table(allRecords)
@@ -23,10 +24,18 @@ const processData = (allRecords) => {
         deathCount += parseInt(record[fields.DEATHS])
         recoveredCount += parseInt(record[fields.RECOVERED])
         newCount += parseInt(record[fields.NEW_CASES])
+        activeCount += parseInt(record[fields.ACTIVE])
     }
     const countryCount = Object.keys(countries).length
 
-    return [totalCount, deathCount, recoveredCount, newCount, countryCount]
+    return [
+        totalCount,
+        deathCount,
+        recoveredCount,
+        newCount,
+        activeCount,
+        countryCount,
+    ]
 }
 
 class Overview extends React.Component {
@@ -41,7 +50,8 @@ class Overview extends React.Component {
             deathCount,
             recoveredCount,
             newCount,
-            countryCount
+            activeCount,
+            countryCount,
         ] = processData(records)
 
         return (
@@ -58,6 +68,7 @@ class Overview extends React.Component {
                             <th className="text-warning">NEW*</th>
                             <th className="text-danger">DEATHS</th>
                             <th className="text-success">RECOVERED</th>
+                            <th className="text-info">ACTIVE</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,6 +84,9 @@ class Overview extends React.Component {
                             </td>
                             <td className="text-success">
                                 {numeral(recoveredCount).format('0,0')}
+                            </td>
+                            <td className="text-info">
+                                {numeral(activeCount).format('0,0')}
                             </td>
                         </tr>
                     </tbody>

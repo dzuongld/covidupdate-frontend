@@ -92,6 +92,44 @@ class Overview extends React.Component {
                     </tbody>
                 </table>
 
+                <table className="table table-striped table-mobile">
+                    <tbody>
+                        <tr>
+                            <td className="col text-primary">TOTAL</td>
+                            <td className="text-primary">
+                                {numeral(totalCount).format('0,0')}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td className="text-warning">NEW*</td>
+                            <td className="text-warning">
+                                {numeral(newCount).format('0,0')}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td className="text-danger">DEATHS</td>
+                            <td className="text-danger">
+                                {numeral(deathCount).format('0,0')}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td className="text-success">RECOVERED</td>
+                            <td className="text-success">
+                                {numeral(recoveredCount).format('0,0')}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td className="text-info">ACTIVE</td>
+                            <td className="text-info">
+                                {numeral(activeCount).format('0,0')}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <p>* Compared to previous day</p>
                 <p style={{ fontSize: '120%' }}>
                     Affected countries:{' '}

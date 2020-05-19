@@ -67,8 +67,20 @@ th {
     border-top: 1px solid #282828;
 }
 
+.table-mobile {
+    display: none;
+}
+
 @media only screen and (max-width: 600px) {
     .mapContainer {
         height: 250px;
+    }
+
+    table {
+        display: none;
+    }
+
+    .table-mobile {
+        display: block;
     }
 }

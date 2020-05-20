@@ -15,6 +15,7 @@ const convertToGeoJSON = (data) => {
         const newCases = parseInt(data[location][fields.NEW_CASES])
         const deaths = parseInt(data[location][fields.DEATHS])
         const recovered = parseInt(data[location][fields.RECOVERED])
+        const active = parseInt(data[location][fields.ACTIVE])
 
         const latRaw =
             data[location][fields.LATITUDE] || data[location][fields2.LATITUDE]
@@ -40,12 +41,14 @@ const convertToGeoJSON = (data) => {
             newCases,
             deaths,
             recovered,
+            active,
             description: `
                         <strong>${title}</strong><br/>
                         Confirmed: ${totalCases}<br/>
                         New Cases: ${newCases}<br/>
                         Deaths: ${deaths}<br/>
-                        Recovered: ${recovered}
+                        Recovered: ${recovered}<br/>
+                        Active: ${active}
                         `,
         }
         geojson.features.push(record)

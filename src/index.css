@@ -56,6 +56,10 @@ th {
     font-family: 'Open Sans', sans-serif;
 }
 
+.mapbox-improve-map {
+    display: none;
+}
+
 /* ======= END MAPBOX ====== */
 
 .content {

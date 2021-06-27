@@ -7,6 +7,7 @@ import Map from './components/Map'
 import NavBar from './components/NavBar'
 import { DataContext } from './contexts/DataContext'
 import Loader from './components/Loader'
+import TravelInfo from './components/TravelInfo'
 
 // lazy loading - downloaded on the fly
 // const Home = React.lazy(() => import('./components/Home'))
@@ -35,6 +36,9 @@ class App extends React.Component {
                                     </Route>
                                     <Route path="/map">
                                         <Map />
+                                    </Route>
+                                    <Route path="/travel">
+                                        <TravelInfo />
                                     </Route>
                                     {/* fall back */}
                                     <Redirect to="/"></Redirect>

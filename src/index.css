@@ -60,6 +60,14 @@ th {
     display: none;
 }
 
+.mapboxgl-ctrl-bottom-right {
+    display: none;
+}
+
+#sherpa-map {
+    background-color:floralwhite;
+}
+
 /* ======= END MAPBOX ====== */
 
 .content {
